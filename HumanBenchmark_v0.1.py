@@ -38,7 +38,7 @@ def goThrough():
 
 
 def start_listener():
-    keyboard.wait("+")
+    keyboard.wait("shift")
     print('starting')
     # Create a background threads for emergency escape and the actual clicking
     escape_thread = threading.Thread(target=escape_listener)
