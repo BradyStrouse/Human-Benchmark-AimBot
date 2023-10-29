@@ -44,12 +44,12 @@ def screenshot_area(x, y):
         # Grab the data
         sct_img = sct.grab(monitor)
         # Save to the picture file
-        mss.tools.to_png(sct_img.rgb, sct_img.size, output=output)
+        # mss.tools.to_png(sct_img.rgb, sct_img.size, output=output)
         return sct_img
     
 
 def take_screenshot():
-    delete_screenshots()
+    # delete_screenshots()
     with mss.mss() as sct:
         # The screen part to capture
         global monitor
@@ -59,9 +59,8 @@ def take_screenshot():
         # Grab the data
         sct_img = sct.grab(monitor)
         # Save to the picture file
-        mss.tools.to_png(sct_img.rgb, sct_img.size, output=output)
+        # mss.tools.to_png(sct_img.rgb, sct_img.size, output=output)
         return sct_img
 
 if __name__ == "__main__":
-    delete_potential()
-    delete_screenshots()
+    take_screenshot()

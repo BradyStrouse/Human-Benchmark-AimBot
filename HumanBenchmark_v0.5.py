@@ -7,39 +7,47 @@ import mouse
 from screenshot import screenshot_area
 from screenshot import take_screenshot
 from screenshot import monitor
-target_color = "#95c3e8"
-start_button = "shift"
 
+target_color = (149, 195, 232)
+start_button = "shift"
+running = True
 """
 this is where everything is actually put together/
 where the main logic happens
 """
-def main_controller():
-    print("starting")
-    find_target()
+def main_controller():    
+    global running
+    screenshot = take_screenshot()
+    save_color = (255,209,84)
+    while screenshot.pixel(450,450) != save_color:
+        screenshot = take_screenshot()
+        find_target(screenshot)
+    else:
+        print("ending game...")
+        running = False
+
+        
+
 
 def click_on(horizontal_coor, vertical_coor):
     mouse.move(horizontal_coor, vertical_coor, absolute=True)
     mouse.click() 
 
-def find_target():
-    global monitor
-    screenshot = take_screenshot()
-    count = 0
-    for vertical in range(monitor["top"], monitor["height"]-1):
-        for horizontal in range(monitor["left"], monitor["width"]-1):
-            # print(screenshot.pixel(horizontal,vertical))
+def find_target(screenshot):
+    global monitor, running
+    if running == False:
+        return
+    for vertical in range(0, screenshot.height):
+        for horizontal in range(0, screenshot.width):
+            #these are the coords on the actual screen
+            x = horizontal + monitor["left"]
+            y = vertical + monitor["top"]
+
             curr_pixel = screenshot.pixel(horizontal,vertical)
-            (r,g,b) = curr_pixel
+            #clicks on targets pixels
             if curr_pixel == (149,195,232):
-                count += 1
-                # print(curr_pixel)
-                screenshot_area(horizontal, vertical)
-                # print("clicking", horizontal,"  ", vertical)
-                # click_on(horizontal, vertical)
-    exit()
-
-
+                click_on(x, y)
+                return
 
 
 
@@ -54,9 +62,9 @@ def begin_listener():
     main_thread.start()
 def escape_listener():
     global running
-    keyboard.wait("esc")
-    running = False
-    print("Emergency escape has been pressed, exiting now")
+    while not running:
+        keyboard.wait("esc")
+        running = False
     exit()
 
 
