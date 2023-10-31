@@ -9,6 +9,10 @@ from screenshot import screenshot_area
 from screenshot import take_screenshot
 from screenshot import monitor
 
+from start import *
+"""
+In v0.7 I took 0.5 and optomized it, there are no significant changes, just small things
+"""
 target_color = (149, 195, 232)
 start_button = "shift"
 running = True
@@ -18,6 +22,7 @@ where the main logic happens
 """
 def main_controller():    
     global running
+    print("starting...")
     screenshot = take_screenshot()
     save_color = (255,209,84)
     while screenshot.pixel(450,450) != save_color:
@@ -39,41 +44,24 @@ def find_target(screenshot):
     global monitor, running
     if running == False:
         return
-    for vertical in range(0, screenshot.height):
-        for horizontal in range(0, screenshot.width):
+    for vertical in range(0, screenshot.height, 70):
+        for horizontal in range(0, screenshot.width, 50):
             #these are the coords on the actual screen
             x = horizontal + monitor["left"]
             y = vertical + monitor["top"]
 
             curr_pixel = screenshot.pixel(horizontal,vertical)
+            (r,g,b) = curr_pixel
             #clicks on targets pixels
             if curr_pixel == (149,195,232):
                 click_on(x, y)
                 return
 
 
-
-# initilizes the keyboard threads to begin and end the program
-def begin_listener():
-    keyboard.wait("shift")
-    # queue the threads
-    escape_thread = threading.Thread(target=escape_listener)
-    main_thread = threading.Thread(target=main_controller)
-    # Start all 
-    escape_thread.start()
-    main_thread.start()
-def escape_listener():
-    global running
-    while not running:
-        keyboard.wait("esc")
-        running = False
-    exit()
-
-
 #start of program
 def main():
     print("Press SHIFT to begin, press ESCAPE to stop the program")
-    begin_listener()
+    begin_listener(main_controller)
     # find_target()
 
 if __name__=="__main__":
