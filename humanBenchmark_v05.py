@@ -41,8 +41,8 @@ def find_target(screenshot):
     global monitor, running
     if running == False:
         return
-    for vertical in range(0, screenshot.height, 70):
-        for horizontal in range(0, screenshot.width, 50):
+    for vertical in range(0, screenshot.height):
+        for horizontal in range(0, screenshot.width):
             #these are the coords on the actual screen
             x = horizontal + monitor["left"]
             y = vertical + monitor["top"]
