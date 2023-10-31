@@ -1,10 +1,35 @@
 import os
 import mss
 
-
+# this is the area I have defined as the play area (could change with different resolutions)
 monitor = {"top"  : 163 , "left"  : 450
           ,"width": 1000, "height": 500}
-#deletes all screenshots taken, 
+
+
+target_count = 0
+def screenshot_area(x, y, width, height, save_sc = False):
+    # delete_potential()
+    global target_count
+    target_count +=1
+    monitor = {"top"  : x , "left"  : y
+          ,"width": width, "height": height}
+    with mss.mss() as sct:
+        # Grabs the data
+        sct_img = sct.grab(monitor)
+
+        if save_sc:
+            output = "potiential_target" + str(target_count) + ".png"
+            # Saves the picture to a file
+            mss.tools.to_png(sct_img.rgb, sct_img.size, output=output)
+
+        return sct_img
+    
+# simple screenshot, already defined area for 1080p
+def take_screenshot():
+    return screenshot_area(monitor["top"], monitor["left"], monitor["width"], monitor["height"])
+
+
+#deletes all screenshots taken (used for beta testing) 
 def delete_screenshots():
     directory = os.getcwd()  # Get the current working directory
 
@@ -17,6 +42,9 @@ def delete_screenshots():
             os.remove(os.path.join(directory, filename))
             print(f"Deleted: {filename}")
 
+
+
+#deletes the target specific screenshots (used for beta testing)
 def delete_potential():
     directory = os.getcwd()  # Get the current working directory
 
@@ -30,37 +58,6 @@ def delete_potential():
 
 
 
-target_count = 0
-def screenshot_area(x, y):
-    # delete_potential()
-    global target_count
-    target_count +=1
-    monitor = {"top"  : x , "left"  : y
-          ,"width": 100, "height": 100}
-    with mss.mss() as sct:
-        #output name
-        output = "potiential_target" + str(target_count) + ".png"
-
-        # Grab the data
-        sct_img = sct.grab(monitor)
-        # Save to the picture file
-        # mss.tools.to_png(sct_img.rgb, sct_img.size, output=output)
-        return sct_img
-    
-
-def take_screenshot():
-    # delete_screenshots()
-    with mss.mss() as sct:
-        # The screen part to capture
-        global monitor
-        #output name
-        output = "sct-{top}x{left}_{width}x{height}.png".format(**monitor)
-
-        # Grab the data
-        sct_img = sct.grab(monitor)
-        # Save to the picture file
-        # mss.tools.to_png(sct_img.rgb, sct_img.size, output=output)
-        return sct_img
 
 if __name__ == "__main__":
     take_screenshot()
