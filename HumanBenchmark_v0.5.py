@@ -3,6 +3,7 @@ import keyboard
 import threading
 import os
 import mouse
+from time import sleep
 
 from screenshot import screenshot_area
 from screenshot import take_screenshot
@@ -22,6 +23,7 @@ def main_controller():
     while screenshot.pixel(450,450) != save_color:
         screenshot = take_screenshot()
         find_target(screenshot)
+        sleep(.008)
     else:
         print("ending game...")
         running = False
