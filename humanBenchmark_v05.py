@@ -23,7 +23,7 @@ def main_controller():
     screenshot = take_screenshot()
     save_color = (255,209,84)
     while screenshot.pixel(450,450) != save_color:
-        screenshot = take_screenshot()
+        screenshot = take_screenshot(save=False)
         find_target(screenshot)
         sleep(.008)
     else:
