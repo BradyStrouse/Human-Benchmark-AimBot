@@ -31,18 +31,22 @@ global screenshot
 def main_controller():    
     global running, screenshot
     print("starting...")
-    screenshot = take_screenshot()
 
+    #clicks on the inital target
+    click_on(910,450)
+
+    screenshot = take_screenshot()
     # this is the color of the save button
     save_color = (255,209,84)
-    while screenshot.pixel(450,450) != save_color:
+    while screenshot.pixel(450,450) != save_color and running == True:
         screenshot = take_screenshot()
         find_target(screenshot)
-        mouseMovements()
         sleep(.008)
     else:
         print("ending game...")
+        keyboard.unhook_all()
         running = False
+        exit()
 
         
 
@@ -64,28 +68,27 @@ def find_target(screenshot):
             curr_pixel = screenshot.pixel(horizontal,vertical)
             (r,g,b) = curr_pixel
             #clicks on targets pixels
-            if curr_pixel == (149,195,232):
+            if curr_pixel == (149,195,232) or curr_pixel == (255,255,255):
                 click_on(x, y)
                 return
 
-def mouseMovements():
-    global monitor, running, screenshot
-    if running == False:
-        return
-    for vertical in range(0, screenshot.height, 70):
-        for horizontal in range(0, screenshot.width, 50):
-            #these are the coords on the actual screen
-            x = horizontal + monitor["left"]
-            y = vertical + monitor["top"]
+# def mouseMovements():
+#     global monitor, running, screenshot
+#     if running == False:
+#         return
+#     for vertical in range(0, screenshot.height, 70):
+#         for horizontal in range(0, screenshot.width, 50):
+#             #these are the coords on the actual screen
+#             x = horizontal + monitor["left"]
+#             y = vertical + monitor["top"]
 
-            curr_pixel = screenshot.pixel(horizontal,vertical)
-            (r,g,b) = curr_pixel
-            #clicks on targets pixels
-            mouse.move(x,y, absolute=True, duration=1)
-            sleep(.5)
-            if curr_pixel == (149,195,232):
-                click_on(x, y)
-                return
+#             curr_pixel = screenshot.pixel(horizontal,vertical)
+#             (r,g,b) = curr_pixel
+#             #clicks on targets pixels
+#             if curr_pixel == (149,195,232):
+#                 mouse.move(x,y, absolute=True)
+#                 click_on(x, y)
+#                 return
 
 
 def set_running(run):
