@@ -10,24 +10,35 @@ from screenshot import take_screenshot
 from screenshot import monitor
 
 from start import *
+
+
 """
-In v0.7 I took 0.5 and optomized it, there are no significant changes, just small things
+In v0.7 I took v0.5 and optomized it, there are no significant changes, just small things
 """
+
+
 target_color = (149, 195, 232)
 start_button = "shift"
 running = True
+
+
 """
 this is where everything is actually put together/
 where the main logic happens
 """
+#delete later
+global screenshot
 def main_controller():    
-    global running
+    global running, screenshot
     print("starting...")
     screenshot = take_screenshot()
+
+    # this is the color of the save button
     save_color = (255,209,84)
     while screenshot.pixel(450,450) != save_color:
         screenshot = take_screenshot()
         find_target(screenshot)
+        mouseMovements()
         sleep(.008)
     else:
         print("ending game...")
@@ -57,7 +68,32 @@ def find_target(screenshot):
                 click_on(x, y)
                 return
 
+def mouseMovements():
+    global monitor, running, screenshot
+    if running == False:
+        return
+    for vertical in range(0, screenshot.height, 70):
+        for horizontal in range(0, screenshot.width, 50):
+            #these are the coords on the actual screen
+            x = horizontal + monitor["left"]
+            y = vertical + monitor["top"]
 
+            curr_pixel = screenshot.pixel(horizontal,vertical)
+            (r,g,b) = curr_pixel
+            #clicks on targets pixels
+            mouse.move(x,y, absolute=True, duration=1)
+            sleep(.5)
+            if curr_pixel == (149,195,232):
+                click_on(x, y)
+                return
+
+
+def set_running(run):
+    global running
+    running = run
+    if running == False:
+        exit()
+    
 #start of program
 def main():
     print("Press SHIFT to begin, press ESCAPE to stop the program")
