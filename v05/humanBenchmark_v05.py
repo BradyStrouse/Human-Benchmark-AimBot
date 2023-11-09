@@ -5,7 +5,6 @@ import os
 import mouse
 from time import sleep
 
-from base_files.screenshot import screenshot_area
 from base_files.screenshot import take_screenshot
 from base_files.screenshot import monitor
 
