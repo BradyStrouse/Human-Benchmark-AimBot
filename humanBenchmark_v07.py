@@ -3,6 +3,9 @@ import keyboard
 import threading
 import os
 import mouse
+
+import sys 
+
 from time import sleep
 
 from screenshot import screenshot_area
@@ -44,9 +47,12 @@ def main_controller():
         sleep(.008)
     else:
         print("ending game...")
-        keyboard.unhook_all()
+        try:
+            keyboard.unhook_all()
+        except Exception as e:
+            print(f"Error unhooking keyboard: {e}")
         running = False
-        exit()
+        sys.exit()
 
         
 
@@ -71,26 +77,7 @@ def find_target(screenshot):
             if curr_pixel == (149,195,232) or curr_pixel == (255,255,255):
                 click_on(x, y)
                 return
-
-# def mouseMovements():
-#     global monitor, running, screenshot
-#     if running == False:
-#         return
-#     for vertical in range(0, screenshot.height, 70):
-#         for horizontal in range(0, screenshot.width, 50):
-#             #these are the coords on the actual screen
-#             x = horizontal + monitor["left"]
-#             y = vertical + monitor["top"]
-
-#             curr_pixel = screenshot.pixel(horizontal,vertical)
-#             (r,g,b) = curr_pixel
-#             #clicks on targets pixels
-#             if curr_pixel == (149,195,232):
-#                 mouse.move(x,y, absolute=True)
-#                 click_on(x, y)
-#                 return
-
-
+            
 def set_running(run):
     global running
     running = run

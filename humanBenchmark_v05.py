@@ -54,7 +54,9 @@ def find_target(screenshot):
                 click_on(x, y)
                 return
 
-
+def toggleRunning():
+    global running
+    running = not running
 #start of program
 def main():
     print("Press SHIFT to begin, press ESCAPE to stop the program")
