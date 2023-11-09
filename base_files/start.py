@@ -1,9 +1,9 @@
 import keyboard
 import threading
 import sys 
-import humanBenchmark_v05 as hb5
+from v05 import humanBenchmark_v05 as hb5
 
-import humanBenchmark_v07 as hb7
+from v07 import humanBenchmark_v07 as hb7
 
 """
 this file is only used from 0.7 onwards, its just the code that waits to start the program
