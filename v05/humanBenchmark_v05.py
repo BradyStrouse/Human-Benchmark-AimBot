@@ -5,10 +5,10 @@ import os
 import mouse
 from time import sleep
 
-from base_files.screenshot import take_screenshot
-from base_files.screenshot import monitor
+from utils.screenshot import take_screenshot
+from utils.screenshot import monitor
 
-from base_files.start import *
+from utils.start import *
 target_color = (149, 195, 232)
 start_button = "shift"
 running = True

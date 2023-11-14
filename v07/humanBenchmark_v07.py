@@ -8,11 +8,11 @@ import sys
 
 from time import sleep
 
-from base_files.screenshot import screenshot_area, take_screenshot
-from base_files.screenshot import take_screenshot
-from base_files.screenshot import monitor
+from utils.screenshot import screenshot_area, take_screenshot
+from utils.screenshot import take_screenshot
+from utils.screenshot import monitor
 
-from base_files.start import *
+from utils.start import *
 
 
 """
