@@ -1,9 +1,6 @@
 import keyboard
 import threading
 import sys 
-from v05 import humanBenchmark_v05 as hb5
-
-from v07 import humanBenchmark_v07 as hb7
 
 """
 this file is only used from 0.7 onwards, its just the code that waits to start the program
@@ -15,15 +12,14 @@ def begin_listener(mainName):
     escape_thread = threading.Thread(target=escape_listener)
     main_thread = threading.Thread(target=mainName)
     # Start all 
-    escape_thread.start()
+    # escape_thread.start()
     main_thread.start()
 def escape_listener():
-    print(hb7.running)
-    while hb7.running == True:
+    while True == True:
         keyboard.wait("esc")
         keyboard.unhook_all()
         print("settings to false")
-        hb7.set_running(False)
+        # set_running(False)
         sys.exit(0)
 
 def printsomething():
