@@ -1,6 +1,8 @@
 import mouse
 import threading
 import keyboard
+
+from time import sleep
 # v0.1 is a use of just clicking is every spot that the hitbox could be
 # to be able to confirm a hit on every possible circle in a line, you need to touch every 70 pixels
 # The playable feild is 785 wide and 440 long (approximate)
@@ -32,8 +34,9 @@ def goThrough():
                 if(running):
                     box_center_x = left_x + col * box_width + box_width // 2
                     box_center_y = top_y + row * box_height + box_height // 2
-                    mouse.move(box_center_x, box_center_y, absolute=True, duration=0.0009 )
+                    mouse.move(box_center_x, box_center_y, absolute=True)
                     mouse.click() 
+                    sleep(.008)
                 else: return
 
 

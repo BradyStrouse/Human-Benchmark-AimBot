@@ -5,6 +5,9 @@ import os
 import mouse
 from time import sleep
 
+import sys 
+#allows the import of local folders
+sys.path.append('C:\Coding_Projects\Human-Benchmark-AimBot')
 from utils.screenshot import take_screenshot
 from utils.screenshot import monitor
 

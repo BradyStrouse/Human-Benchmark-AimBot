@@ -4,16 +4,16 @@ import threading
 import os
 import mouse
 
-import sys 
 
 from time import sleep
 
-from utils.screenshot import screenshot_area, take_screenshot
+import sys 
+#allows the import of local folders
+sys.path.append('C:\Coding_Projects\Human-Benchmark-AimBot')
 from utils.screenshot import take_screenshot
 from utils.screenshot import monitor
 
 from utils.start import *
-
 
 """
 In v0.7 I took v0.5 and optomized it, there are no significant changes, just small things
@@ -77,7 +77,7 @@ def find_target(screenshot):
             if curr_pixel == (149,195,232) or curr_pixel == (255,255,255):
                 click_on(x, y)
                 return
-            
+   
 def set_running(run):
     global running
     running = run
