@@ -15,12 +15,11 @@ def begin_listener(mainName):
     # escape_thread.start()
     main_thread.start()
 def escape_listener():
-    while True == True:
-        keyboard.wait("esc")
-        keyboard.unhook_all()
-        print("settings to false")
-        # set_running(False)
-        sys.exit(0)
+    keyboard.wait("esc")
+    keyboard.unhook_all()
+    print("settings to false")
+    # set_running(False)
+    sys.exit(0)
 
 def printsomething():
     print("hello world")
