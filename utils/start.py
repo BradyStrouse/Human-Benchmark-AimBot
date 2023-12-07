@@ -7,12 +7,12 @@ this file is only used from 0.7 onwards, its just the code that waits to start t
 """
 # initilizes the keyboard threads to begin and end the program
 def begin_listener(mainName):
-    # keyboard.wait("shift")
+    keyboard.wait("shift")
     # queue the threads
     escape_thread = threading.Thread(target=escape_listener)
     main_thread = threading.Thread(target=mainName)
     # Start all 
-    # escape_thread.start()
+    escape_thread.start()
     main_thread.start()
 def escape_listener():
     keyboard.wait("esc")

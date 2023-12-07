@@ -29,7 +29,8 @@ def screenshot_area(x, y, width, height, save_sc = False):
     
 # simple screenshot, already defined area for 1080p
 def take_screenshot():
-    return screenshot_area(monitor["top"], monitor["left"], monitor["width"], monitor["height"])
+    print("taking screenshot")
+    return screenshot_area(monitor["top"], monitor["left"], monitor["width"], monitor["height"], save_sc=True)
 
 
 #deletes all screenshots taken (used for beta testing) 
@@ -65,4 +66,4 @@ def get_region():
     return region
 
 if __name__ == "__main__":
-    take_screenshot()
+    delete_potential()

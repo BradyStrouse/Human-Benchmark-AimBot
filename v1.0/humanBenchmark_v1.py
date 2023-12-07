@@ -30,7 +30,6 @@ def main_controller():
     target_location = findTarget()
     while target_location != "not found":
         click_on(target_location.x, target_location.y)
-        # sleep(0.0101)
         target_location = findTarget()
         
     #ends the program
@@ -55,15 +54,14 @@ def findTarget(count=0):
     try:
         global script_directory, target
         target_location = pyautogui.locateCenterOnScreen(target ,grayscale=True, confidence=.35, region=region)
-        
+        # take_screenshot()
         if target_location == None:
             raise Exception(pyautogui.ImageNotFoundException)
         else:
             return target_location
     
     except pyautogui.ImageNotFoundException:
-        take_screenshot()
-        if(count >= 10):
+        if(count >= 5):
             return "not found"
         return findTarget(count=count+1)
 
