@@ -3,8 +3,6 @@ import os
 import mouse
 import sys 
 
-import cProfile
-import re
 
 from time import sleep
 
