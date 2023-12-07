@@ -5,9 +5,6 @@ import mss
 monitor = {"top"  : 163 , "left"  : 450
           ,"width": 1000, "height": 500}
 
-#area defined by (left, top, width, height)
-region = (450, 163, 1000, 500)
-
 
 target_count = 0
 def screenshot_area(x, y, width, height, save_sc = False):
@@ -60,9 +57,7 @@ def delete_potential():
             os.remove(os.path.join(directory, filename))
 
 
-def get_region():
-    global region
-    return region
+
 
 if __name__ == "__main__":
     take_screenshot()

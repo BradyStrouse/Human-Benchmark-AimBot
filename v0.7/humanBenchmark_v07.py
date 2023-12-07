@@ -29,6 +29,7 @@ running = True
 this is where everything is actually put together/
 where the main logic happens
 """
+#delete later
 global screenshot
 def main_controller():    
     global running, screenshot
